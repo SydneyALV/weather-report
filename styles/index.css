@@ -14,7 +14,38 @@
     justify-content: center;
 }
 
+#tempbox {
+    display: flex;
+    flex-direction: column;
+}
+
+#adjust-temp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 section {
     border: 2px red solid;
     text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}
+
+.teal {
+    color: teal;
 }
