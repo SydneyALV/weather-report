@@ -9,12 +9,12 @@ const initialTemp = () => {
 
 const decreaseTemp = () => {
     const temp = document.getElementById("temp-number")
-    temp.textContent = state.tempNumber -= 1;
+    temp.textContent = state.tempNumber--;
 }
 
 const increaseTemp = () => {
     const temp = document.getElementById("temp-number")
-    temp.textContent = state.tempNumber += 1;
+    temp.textContent = state.tempNumber++;
 }
 
 const registerEvents = () => {
@@ -27,3 +27,9 @@ const registerEvents = () => {
 
 document.addEventListener("DOMContentLoaded", registerEvents)
 
+
+
+
+// Location API
+
+// OpenWeather API
