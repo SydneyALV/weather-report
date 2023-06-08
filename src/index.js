@@ -1,6 +1,7 @@
 const state = {
     tempNumber: 70, //temporary num, make default current temp
     landscape: "",
+    cityName: "",
 }
 
 const initialTemp = () => {
@@ -55,6 +56,14 @@ const changeLandscape = () => {
     }
 };
 
+const changeCityName = () => {
+    let citynamebox = document.getElementById("city-title")
+    let citynameboxContent = citynamebox.textContent
+    let cityinput = document.getElementById("city-input")
+    let cityinputContent = cityinput.textContent
+    console.log(cityinputContent)
+    citynameboxContent = cityinputContent
+};
 
 const registerEvents = () => {
     initialTemp()
@@ -62,6 +71,8 @@ const registerEvents = () => {
     decreaseButton.addEventListener("click", decreaseTemp)
     const increaseButton = document.getElementById("increase-button");
     increaseButton.addEventListener("click", increaseTemp)
+    const citytitle = document.querySelector("#city-input")
+    citytitle.addEventListener("type",changeCityName)
 }
 
 document.addEventListener("DOMContentLoaded", registerEvents)

@@ -49,3 +49,8 @@ section {
 .teal {
     color: teal;
 }
+
+#searchbox {
+    display: flex;
+    flex-direction: column;
+}
