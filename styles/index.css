@@ -1,0 +1,12 @@
+#tilecontainer {
+    display: grid;
+    border: 2px red solid;
+    grid-row: 1;
+    grid-column: 3;
+}
+.tiles {
+    display: flex;
+    border: 2px solid black;
+    width: 15rem;
+    flex-direction: row;
+}
