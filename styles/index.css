@@ -14,9 +14,20 @@
     justify-content: center;
 }
 
+#city-title {
+    size: 10rem;
+    color: blue;
+}
 #tempbox {
     display: flex;
     flex-direction: column;
+}
+
+#tempButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
 }
 
 #adjust-temp {
