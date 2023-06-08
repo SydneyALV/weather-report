@@ -58,11 +58,9 @@ const changeLandscape = () => {
 
 const changeCityName = () => {
     let citynamebox = document.getElementById("city-title")
-    let citynameboxContent = citynamebox.textContent
     let cityinput = document.getElementById("city-input")
-    let cityinputContent = cityinput.textContent
-    console.log(cityinputContent)
-    citynameboxContent = cityinputContent
+    let cityinputContent = cityinput.value
+    citynamebox.textContent = cityinputContent
 };
 
 const registerEvents = () => {
@@ -72,7 +70,7 @@ const registerEvents = () => {
     const increaseButton = document.getElementById("increase-button");
     increaseButton.addEventListener("click", increaseTemp)
     const citytitle = document.querySelector("#city-input")
-    citytitle.addEventListener("type",changeCityName)
+    citytitle.addEventListener("input",changeCityName)
 }
 
 document.addEventListener("DOMContentLoaded", registerEvents)
