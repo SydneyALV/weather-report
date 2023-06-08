@@ -1,12 +1,20 @@
 #tilecontainer {
-    display: grid;
+    display: flex;
     border: 2px red solid;
-    grid-row: 1;
-    grid-column: 3;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
 }
 .tiles {
     display: flex;
     border: 2px solid black;
     width: 15rem;
     flex-direction: row;
+    justify-content: center;
+}
+
+section {
+    border: 2px red solid;
+    text-align: center;
 }
