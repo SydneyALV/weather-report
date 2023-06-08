@@ -23,19 +23,28 @@
         </section>
         <section id="tempbox" class="tiles"> Temperature 
             <section id="tempButtonsContainer">
-                <section id="decrease-button"> ⬅️ </section>
-                <section id="temp-number"></section>
-                <section id="increase-button"> ➡️</section>
+                <section id="decrease-button" class="temp"> ⬅️ </section>
+                <section id="temp-number" class="temp"> F</section>
+                <section id="increase-button" class="temp"> ➡️</section>
             </section>
         </section>
-        <section id="skybox" class="tiles" > Sky </section>
+        <section id="skybox" class="tiles" > Sky
+            <section id="skySelectorContainer">
+                <select id="sky-selector" name="sky-selector">
+                    <option value="Sunny">Sunny</option>
+                    <option value="Cloudy">Cloudy</option>
+                    <option value="Rainy">Rainy</option>
+                    <option value="Snowy">Snowy</option>
+                </select>
+            </section>
+        </section>
     </section>
     <section id="landscape-container"> Weather Garden
         <section id="landscape" class="weather-garden"> Landscape</section>
     </section>
 </main>
 <footer> 
-    <section> Created by </section>
+    <section> Created by Agnes and Sydney</section>
 </footer>
     <script src="./src/index.js"></script>
     <script src="./node_modules/axios/dist/axios.min.js"></script>

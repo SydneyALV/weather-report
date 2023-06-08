@@ -2,32 +2,55 @@
     display: flex;
     border: 2px red solid;
     flex-direction: row;
-    align-content: center;
-    align-items: center;
+    /* align-content: center; */
+    /* align-items: center; */
     justify-content: space-around;
 }
 .tiles {
     display: flex;
     border: 2px solid black;
     width: 15rem;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: center;
+    height: 100px;
+    width: 300px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.weather-garden {
+    font-size: xx-large;
+}
+
+#temp-number {
+    font-size: 3rem;
+    font-style: oblique;
 }
 
 #city-title {
     size: 10rem;
     color: blue;
 }
-#tempbox {
+#tempbox, #skybox {
     display: flex;
     flex-direction: column;
 }
 
-#tempButtonsContainer {
+.temp {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+#tempButtonsContainer, #skySelectorContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 2rem;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: lightcyan;
 }
 
 #adjust-temp {
@@ -36,6 +59,9 @@
     justify-content: center;
 }
 
+#sky-selector {
+    width: 100%
+}
 section {
     border: 2px red solid;
     text-align: center;
@@ -50,7 +76,7 @@ section {
 }
 
 .yellow {
-    color: yellow;
+    color: rgb(216, 216, 81);
 }
 
 .green {

@@ -1,6 +1,5 @@
 const state = {
     tempNumber: 70, //temporary num, make default current temp
-    landscape: "",
     cityName: "",
 }
 
@@ -56,6 +55,19 @@ const changeLandscape = () => {
     }
 };
 
+const changeSky = ({target: {value}}) => {
+    const sky = document.getElementById("sky")
+    if (value == "Sunny") {
+        sky.textContent = "☁️ ☁️ ☁️ ☀️ ☁️ ☁️"
+    } else if (value == "Cloudy") {
+        sky.textContent = "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️"
+    } else if (value == "Rainy") {
+        sky.textContent = "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧"
+    } else if (value == "Snowy") {
+        sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨" 
+    }
+};
+
 const changeCityName = () => {
     let cityNameBox = document.getElementById("city-title")
     let cityInput = document.getElementById("city-input")
@@ -71,6 +83,8 @@ const registerEvents = () => {
     increaseButton.addEventListener("click", increaseTemp)
     const cityTitle = document.querySelector("#city-input")
     cityTitle.addEventListener("input",changeCityName)
+    const skySelect = document.getElementById("sky-selector")
+    skySelect.addEventListener("change", changeSky)
 }
 
 document.addEventListener("DOMContentLoaded", registerEvents)
