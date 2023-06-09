@@ -45,11 +45,11 @@ const changeColorTemp = () => {
 const changeLandscape = () => {
     const landscape = document.getElementById("landscape")
     if (state.tempNumber >= 80) {
-        landscape.textContent = "🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂"
+        landscape.textContent = "🌵  🐍 🦂 🌵🌵  🐍 🏜 🦂"
     } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
-        landscape.textContent = "🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷"
+        landscape.textContent = "🌸🌿🌼 🌷🌻🌿 ☘️🌱 🌻🌷"
     } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
-        landscape.textContent = "🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃"
+        landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾_🍃"
     } else if (state.tempNumber <= 59) {
         landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲" 
     }
@@ -57,14 +57,19 @@ const changeLandscape = () => {
 
 const changeSky = ({target: {value}}) => {
     const sky = document.getElementById("sky")
+    const skyBackground = document.getElementById("sky-gradient")
     if (value == "Sunny") {
         sky.textContent = "☁️ ☁️ ☁️ ☀️ ☁️ ☁️"
+        skyBackground.classList = ['sunny']
     } else if (value == "Cloudy") {
         sky.textContent = "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️"
+        skyBackground.classList = ['cloudy']
     } else if (value == "Rainy") {
         sky.textContent = "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧"
+        skyBackground.classList = ['rainy']
     } else if (value == "Snowy") {
         sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨" 
+        skyBackground.classList = ['snowy']
     }
 };
 

@@ -9,17 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css" />
 </head>
-<body>
+<body id="sky-gradient">
 <header>
     <section id="sky" class="weather-garden"> ☁️ ☁️ ☁️ ☀️ ☁️ ☁️ </section>
-    <section> <h1> Weather Report</h1> </section>
+    <section> <h1> Weather Report</h1>
+    <h2>What's the weather like in...</h2>
     <section >
-         <h2 id="city-title"> City Name </h2>
+        <h2 id="city-title"></h2>
         </section>
 </header>
 <main> 
     <section id="tilecontainer">
-        <section id="searchbox" class="tiles"> Search Box For City
+        <section id="searchbox" class="tiles">Search Box For City
             <input id="city-input" type="text" name="City"> 
             <button id="city-search-button"> Search for City </button>
         </section>
@@ -29,7 +30,7 @@
                 <section id="temp-number" class="temp"> F</section>
                 <section id="increase-button" class="temp"> ➡️</section>
             </section>
-            <section id="real-temp-button" >Get Current Temperature</section>
+            <button id="real-temp-button">Get Current Temperature</button>
         </section>
         <section id="skybox" class="tiles" > Sky
             <section id="skySelectorContainer">
