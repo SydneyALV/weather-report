@@ -2,8 +2,7 @@
     display: flex;
     border: 2px red solid;
     flex-direction: row;
-    /* align-content: center; */
-    /* align-items: center; */
+    height: 50vh;
     justify-content: space-around;
 }
 .tiles {
@@ -12,7 +11,7 @@
     width: 15rem;
     flex-flow: row wrap;
     justify-content: center;
-    height: 100px;
+    height: 50vh;
     width: 300px;
     border-radius: 5px;
     font-size: 1.2rem;
@@ -21,14 +20,18 @@
 .weather-garden {
     font-size: xx-large;
 }
-
+#real-temp-button {
+    margin-top: 5vh;
+    width: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+}
 #temp-number {
     font-size: 3rem;
     font-style: oblique;
 }
 
 #city-title {
-    size: 10rem;
     color: blue;
 }
 #tempbox, #skybox {
@@ -90,4 +93,10 @@ section {
 #searchbox {
     display: flex;
     flex-direction: column;
+}
+
+#city-input, #city-search-button, #skySelectorContainer {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -12,14 +12,14 @@ const initialTemp = () => {
 
 const decreaseTemp = () => {
     const temp = document.getElementById("temp-number")
-    temp.textContent = state.tempNumber--;
+    temp.textContent = state.tempNumber -= 1;
     changeColorTemp()
     changeLandscape()
 }
 
 const increaseTemp = () => {
     const temp = document.getElementById("temp-number")
-    temp.textContent = state.tempNumber++;
+    temp.textContent = state.tempNumber +=1;
     changeColorTemp()
     changeLandscape()
 }
