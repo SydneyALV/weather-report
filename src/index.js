@@ -97,42 +97,42 @@ const registerEvents = () => {
 
 document.addEventListener("DOMContentLoaded", registerEvents)
 
-// Location API
-const axios = require('axios');
+// // Location API
+// const axios = require('axios');
 
-const LOCATIONIQ_KEY = process.env['locationIQ_key'];
+// const LOCATIONIQ_KEY = process.env['locationIQ_key'];
 
-const findLatitudeAndLongitude = (city) => {
-    let latitude, longitude;
+// const findLatitudeAndLongitude = (city) => {
+//     let latitude, longitude;
     
-    axios.get('https://us1.locationiq.com/v1/search.php',
-    {
-        params: {
-            key: LOCATIONIQ_KEY,
-            q: city,
-            format: 'json'
-        }
-    })
-    .then(response => {
-        latitude = response.data[0].lat;
-        longitude = response.data[0].lon;
-        findTemp(latitude, longitude);
-    })
-    .catch(error => {
-        console.log(error, 'error in findLatitudeAndLongitude!');
-    });
-}
+//     axios.get('https://us1.locationiq.com/v1/search.php',
+//     {
+//         params: {
+//             key: LOCATIONIQ_KEY,
+//             q: city,
+//             format: 'json'
+//         }
+//     })
+//     .then(response => {
+//         latitude = response.data[0].lat;
+//         longitude = response.data[0].lon;
+//         findTemp(latitude, longitude);
+//     })
+//     .catch(error => {
+//         console.log(error, 'error in findLatitudeAndLongitude!');
+//     });
+// }
 
-// OpenWeather API
-const OPENWEATHER_KEY = process.env['openWeather_key']
+// // OpenWeather API
+// const OPENWEATHER_KEY = process.env['openWeather_key']
 
-const findTemp = (lat, lon) => {
+// const findTemp = (lat, lon) => {
     
-    axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_KEY}`)
-    .then(response => {
-        return response.data.current.temp
-    })
-    .catch(error => {
-        console.log(error, "Temperature could not be found.")
-    })
-}
+//     axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_KEY}`)
+//     .then(response => {
+//         return response.data.current.temp
+//     })
+//     .catch(error => {
+//         console.log(error, "Temperature could not be found.")
+//     })
+// }
