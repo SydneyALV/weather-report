@@ -1,5 +1,5 @@
 const state = {
-    tempNumber: 70, //temporary num, make default current temp
+    tempNumber: findTemp(state.cityName), //temporary num, make default current temp
     cityName: "",
 }
 
@@ -19,16 +19,16 @@ const decreaseTemp = () => {
 
 const increaseTemp = () => {
     const temp = document.getElementById("temp-number")
-    temp.textContent = state.tempNumber +=1;
+    temp.textContent = state.tempNumber += 1;
     changeColorTemp()
     changeLandscape()
 }
 
 const changeColorTemp = () => {
-    
+
     const temp = document.querySelector("#temp-number")
     // const currentColor = temp.classList
-    
+
     if (state.tempNumber >= 80) {
         temp.classList = ["red"]
     } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
@@ -51,11 +51,11 @@ const changeLandscape = () => {
     } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
         landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾_🍃"
     } else if (state.tempNumber <= 59) {
-        landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲" 
+        landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲"
     }
 };
 
-const changeSky = ({target: {value}}) => {
+const changeSky = ({ target: { value } }) => {
     const sky = document.getElementById("sky")
     const skyBackground = document.getElementById("sky-gradient")
     if (value == "Sunny") {
@@ -68,7 +68,7 @@ const changeSky = ({target: {value}}) => {
         sky.textContent = "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧"
         skyBackground.classList = ['rainy']
     } else if (value == "Snowy") {
-        sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨" 
+        sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨"
         skyBackground.classList = ['snowy']
     }
 };
@@ -77,6 +77,7 @@ const changeCityName = () => {
     let cityNameBox = document.getElementById("city-title")
     let cityInput = document.getElementById("city-input")
     let cityInputContent = cityInput.value
+    state.cityName = cityInputContent
     cityNameBox.textContent = cityInputContent
 };
 
@@ -88,7 +89,7 @@ const registerEvents = () => {
     const increaseButton = document.getElementById("increase-button");
     increaseButton.addEventListener("click", increaseTemp)
     const cityTitle = document.querySelector("#city-input")
-    cityTitle.addEventListener("input",changeCityName)
+    cityTitle.addEventListener("input", changeCityName)
     const skySelect = document.getElementById("sky-selector")
     skySelect.addEventListener("change", changeSky)
     const searchCity = document.querySelector("#city-input")
@@ -102,53 +103,34 @@ const axios = require('axios');
 
 const LOCATIONIQ_KEY = process.env['locationIQ_key'];
 
-const findLatitudeAndLongitude =  (city) => {
+const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
-    
-    axios.get('https://us1.locationiq.com/v1/search.php',
-    {
-        params: {
-            key: LOCATIONIQ_KEY,
-            q: city,
-            format: 'json'
-        }
-    })
-    .then(response => {
-        latitude = response.data[0].lat;
-        longitude = response.data[0].lon;
-        findTemp(latitude, longitude);
-    })
-    .catch(error => {
-        console.log(error, 'error in findLatitudeAndLongitude!');
-    });
-}
 
-const findLatitudeAndLongitude2 = async (city) => {
-    let latitude, longitude;
-    
     const response = await axios.get('https://us1.locationiq.com/v1/search.php',
-    {
-        params: {
-            key: LOCATIONIQ_KEY,
-            q: city,
-            format: 'json'
-        }
-    })
-        latitude = response.data[0].lat;
-        longitude = response.data[0].lon;
-        return findTemp(latitude, longitude);
+        {
+            params: {
+                key: LOCATIONIQ_KEY,
+                q: city,
+                format: 'json'
+            }
+        })
+    latitude = response.data[0].lat;
+    longitude = response.data[0].lon;
+    return { latitude, longitude };
 }
 
 // OpenWeather API
 const OPENWEATHER_KEY = process.env['openWeather_key']
 
-const findTemp = (lat, lon) => {
-    
-    axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_KEY}`)
-    .then(response => {
-        return response.data.current.temp
-    })
-    .catch(error => {
+const findTemp = async (cityname) => {
+    const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
+
+    try {
+        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`)
+        return response.data.current.temp;
+    }
+    catch (error) {
         console.log(error, "Temperature could not be found.")
-    })
+    }
+
 }
