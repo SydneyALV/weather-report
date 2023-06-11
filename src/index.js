@@ -1,44 +1,54 @@
-// // // Location API
+// // Location API
 // const axios = require('axios');
-// // import axios from "axios";
+// import axios from "axios";
+const OPENWEATHER_KEY = process.env['openWeather_key']
+const LOCATIONIQ_KEY = process.env['locationIQ_key'];
+
+const findLatitudeAndLongitude = async (city) => {
+    let latitude, longitude;
+    try {
+        const response = await axios.get('https://us1.locationiq.com/v1/search.php',
+        {
+            params: {
+                key: LOCATIONIQ_KEY,
+                q: city,
+                format: 'json'
+            }
+        });
+
+    latitude = response.data[0].lat;
+    longitude = response.data[0].lon;
+    return { latitude, longitude };
+    } catch (err) {
+        console.log(err)
+    }
     
-// const LOCATIONIQ_KEY = process.env['locationIQ_key'];
+}
 
-// const findLatitudeAndLongitude = async (city) => {
-//     let latitude, longitude;
+// OpenWeather API
 
-//     const response = await axios.get('https://us1.locationiq.com/v1/search.php',
-//         {
-//             params: {
-//                 key: LOCATIONIQ_KEY,
-//                 q: city,
-//                 format: 'json'
-//             }
-//         })
-//     latitude = response.data[0].lat;
-//     longitude = response.data[0].lon;
-//     return { latitude, longitude };
-// }
 
-// // OpenWeather API
-// const OPENWEATHER_KEY = process.env['openWeather_key']
+const findTemp = async () => {
+    const cityname = state.cityName
+    const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
 
-// const findTemp = async (cityname) => {
-//     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
+    try {
+        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}&units=imperial`)
+        current_temp= Math.floor(response.data.current.temp);
+        tempNumber = document.getElementById("temp-number");
+        tempNumber.textContent = current_temp;
+        state.tempNumber = current_temp;
+        changeColorTemp()
+    }
+    catch (error) {
+        console.log(error, "Temperature could not be found.")
+    }
 
-//     try {
-//         const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`)
-//         return response.data.current.temp;
-//     }
-//     catch (error) {
-//         console.log(error, "Temperature could not be found.")
-//     }
-
-// }
+}
 
 const state = {
     tempNumber: 70, //temporary num, make default current temp
-    cityName: "",
+    cityName: "Atlanta",
 }
 
 const initialTemp = () => {
