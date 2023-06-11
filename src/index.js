@@ -1,5 +1,43 @@
+// // // Location API
+// const axios = require('axios');
+// // import axios from "axios";
+    
+// const LOCATIONIQ_KEY = process.env['locationIQ_key'];
+
+// const findLatitudeAndLongitude = async (city) => {
+//     let latitude, longitude;
+
+//     const response = await axios.get('https://us1.locationiq.com/v1/search.php',
+//         {
+//             params: {
+//                 key: LOCATIONIQ_KEY,
+//                 q: city,
+//                 format: 'json'
+//             }
+//         })
+//     latitude = response.data[0].lat;
+//     longitude = response.data[0].lon;
+//     return { latitude, longitude };
+// }
+
+// // OpenWeather API
+// const OPENWEATHER_KEY = process.env['openWeather_key']
+
+// const findTemp = async (cityname) => {
+//     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
+
+//     try {
+//         const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`)
+//         return response.data.current.temp;
+//     }
+//     catch (error) {
+//         console.log(error, "Temperature could not be found.")
+//     }
+
+// }
+
 const state = {
-    tempNumber: findTemp(state.cityName), //temporary num, make default current temp
+    tempNumber: 70, //temporary num, make default current temp
     cityName: "",
 }
 
@@ -92,45 +130,8 @@ const registerEvents = () => {
     cityTitle.addEventListener("input", changeCityName)
     const skySelect = document.getElementById("sky-selector")
     skySelect.addEventListener("change", changeSky)
-    const searchCity = document.querySelector("#city-input")
-    searchCity.addEventListener("click", findLatitudeAndLongitude)
+    const searchCity = document.getElementById("real-temp-button")
+    searchCity.addEventListener("click", findTemp)
 }
 
 document.addEventListener("DOMContentLoaded", registerEvents)
-
-// Location API
-const axios = require('axios');
-
-const LOCATIONIQ_KEY = process.env['locationIQ_key'];
-
-const findLatitudeAndLongitude = async (city) => {
-    let latitude, longitude;
-
-    const response = await axios.get('https://us1.locationiq.com/v1/search.php',
-        {
-            params: {
-                key: LOCATIONIQ_KEY,
-                q: city,
-                format: 'json'
-            }
-        })
-    latitude = response.data[0].lat;
-    longitude = response.data[0].lon;
-    return { latitude, longitude };
-}
-
-// OpenWeather API
-const OPENWEATHER_KEY = process.env['openWeather_key']
-
-const findTemp = async (cityname) => {
-    const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
-
-    try {
-        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}`)
-        return response.data.current.temp;
-    }
-    catch (error) {
-        console.log(error, "Temperature could not be found.")
-    }
-
-}
