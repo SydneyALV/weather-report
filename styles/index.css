@@ -4,7 +4,6 @@
     --cloudy: linear-gradient(-45deg, white, #a7e3eb, white, #a7e3eb);
     --rainy: linear-gradient(-45deg, #4d73b0, #88a6d6, #3b5a89, #668dca);
     --snowy: linear-gradient(-45deg, #dde6f3, #cdd8ea, #dde6f3, white);
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 * {
@@ -72,7 +71,7 @@ body {
     width: 15rem;
     flex-flow: row wrap;
     justify-content: center;
-    height: 50vh;
+    height: 40vh;
     max-width: 300px; 
     min-width: 100px;
     padding: 5px;
@@ -151,6 +150,11 @@ body {
     align-items: center;
     /* gap: 1.5rem; */
     /* background-color: lightcyan; */
+}
+
+.temp-type {
+    font-size: x-large;
+    gap: 10px
 }
 
 #adjust-temp {
