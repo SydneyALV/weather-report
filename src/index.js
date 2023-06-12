@@ -1,18 +1,16 @@
 // // Location API
 // const axios = require('axios');
 // import axios from "axios";
-const OPENWEATHER_KEY = process.env['openWeather_key']
-const LOCATIONIQ_KEY = process.env['locationIQ_key'];
+// const OPENWEATHER_KEY = process.env['openWeather_key']
+// const LOCATIONIQ_KEY = process.env['locationIQ_key'];
 
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
     try {
-        const response = await axios.get('https://us1.locationiq.com/v1/search.php',
+        const response = await axios.get('http://127.0.0.1:5000/location',
         {
             params: {
-                key: LOCATIONIQ_KEY,
                 q: city,
-                format: 'json'
             }
         });
 
@@ -31,14 +29,21 @@ const findLatitudeAndLongitude = async (city) => {
 const findTemp = async () => {
     const cityname = state.cityName
     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
-
+    
     try {
-        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_KEY}&units=imperial`)
-        current_temp= Math.floor(response.data.current.temp);
+        const response = await axios.get(`http://127.0.0.1:5000/weather`,{
+            params: {
+                "lat": latitude,
+                "lon": longitude,
+            }
+        })
+        current_temp_kelvin= response.data.main.temp;
+        current_temp_fahrenheit = Math.floor((current_temp_kelvin-273.15) * 9/5 +32)
         tempNumber = document.getElementById("temp-number");
-        tempNumber.textContent = current_temp;
-        state.tempNumber = current_temp;
+        tempNumber.textContent = current_temp_fahrenheit;
+        state.tempNumber = current_temp_fahrenheit;
         changeColorTemp()
+        changeLandscape()
     }
     catch (error) {
         console.log(error, "Temperature could not be found.")
@@ -88,6 +93,11 @@ const changeColorTemp = () => {
     } else if (state.tempNumber <= 49) {
         temp.classList = ["teal"]
     }
+};
+
+const resetButton = () => {
+    const reset_city = document.getElementById("city-title")
+    reset_city.textContent = "Atlanta"
 };
 
 const changeLandscape = () => {
