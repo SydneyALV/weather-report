@@ -104,7 +104,7 @@ body {
     color: rgb(90, 90, 237);
     font-size: 6vh;
     letter-spacing: 0.2vh;
-    
+    text-transform: capitalize;
 }
 
 #landscape-container {
