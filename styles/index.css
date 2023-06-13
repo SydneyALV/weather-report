@@ -85,7 +85,7 @@ body {
     font-size: 3rem;
     justify-content: center;
     word-spacing: 20px;
-    padding: 3vh;
+    /* padding: 3vh; */
 }
 #real-temp-button {
     /* margin-top: 5vh; */
@@ -105,10 +105,11 @@ body {
     font-size: 6vh;
     letter-spacing: 0.2vh;
     text-transform: capitalize;
+    height: 5vh;
 }
 
 #landscape-container {
-    padding: 4vh;
+    padding: 2vh;
 }
 
 #tempbox, #skybox {
@@ -129,11 +130,14 @@ body {
 #weather-report-title {
     font-size: 8vh;
     letter-spacing: 0.2vh;
+    margin: 0;
+    /* padding: 0; */
 }
 
 #weather-saying {
     font-size: 4vh;
     font-style: italic;
+    margin: 0;
 }
 
 #decrease-button {
@@ -148,6 +152,7 @@ body {
     /* top: 2px;
     left: 1px; */
     box-shadow: none;
+    border: 2px black solid;
     color: rgb(216, 216, 81);
 }
 
@@ -184,9 +189,7 @@ h1, h2 {
     border-radius: 10px;
 }
 section {
-    /* border: 2px red solid; */
     text-align: center;
-    /* padding: 10px; */
 }
 
 .red {
@@ -241,4 +244,11 @@ button {
     background: rgb(90, 90, 237);
     color: white;
     border-radius: 10px;
+}
+
+footer {
+    /* position: relative;  */
+    text-align: center;
+    bottom: 5px;
+    justify-content: center;
 }

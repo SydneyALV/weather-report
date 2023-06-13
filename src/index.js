@@ -31,8 +31,16 @@ const findTemp = async () => {
         })
         current_temp = response.data.main.temp; // in kelvin
         tempNumber = document.getElementById("temp-number");
-        tempNumber.textContent = convertFahrenheit(current_temp);
-        state.tempNumber = convertFahrenheit(current_temp);
+
+        const celsius = document.querySelector('#celsius')
+        const fahrenheit = document.querySelector('#fahrenheit')
+        if (celsius.classList.contains('active')) {
+            celsius.classList.remove('active')
+            fahrenheit.classList.add('active')
+        }
+
+        state.tempNumber = Math.floor((current_temp - 273.15) * 9/5 + 32);
+        tempNumber.textContent = state.tempNumber;
         changeColorTemp()
         changeLandscape()
     } catch (error) {
@@ -40,14 +48,17 @@ const findTemp = async () => {
     }
 }
 
+
+
 const state = {
-    tempNumber: 70, //temporary num, make default current temp
+    tempNumber: null, //temporary num, make default current temp
     cityName: "Atlanta",
 }
 
-const initialTemp = () => {
+const initialTemp = async () => {
     const temp = document.getElementById("temp-number")
     temp.textContent = state.tempNumber;
+    await findTemp()
     changeColorTemp()
     changeLandscape()
 }
@@ -66,20 +77,33 @@ const increaseTemp = () => {
     changeLandscape()
 }
 
+
+
 const changeColorTemp = () => {
 
     const temp = document.querySelector("#temp-number")
     // const currentColor = temp.classList
+    celsius = document.querySelector('#celsius')
+    fahrenheit = document.querySelector('#fahrenheit')
+    let tempF = 0;
+    
+    if (celsius.classList.contains('active')) {
+        tempF = Math.floor((state.tempNumber * 9/5) + 32);
+    } 
+    
+    if (fahrenheit.classList.contains('active')) {
+        tempF = state.tempNumber;
+    }
 
-    if (state.tempNumber >= 80) {
+    if (tempF >= 80) {
         temp.classList = ["red"]
-    } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
+    } else if (tempF >= 70 && tempF <= 79) {
         temp.classList = ["orange"]
-    } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
+    } else if (tempF >= 60 && tempF <= 69) {
         temp.classList = ["yellow"]
-    } else if (state.tempNumber >= 50 && state.tempNumber <= 59) {
+    } else if (tempF >= 50 && tempF <= 59) {
         temp.classList = ["green"]
-    } else if (state.tempNumber <= 49) {
+    } else if (tempF <= 49) {
         temp.classList = ["teal"]
     }
 };
@@ -128,6 +152,17 @@ const changeCityName = () => {
     cityNameBox.textContent = cityInputContent
 };
 
+const convertCelsius = () => {
+    state.tempNumber = Math.floor(5 / 9 * (state.tempNumber - 32));
+    tempNumber = document.getElementById("temp-number")
+    tempNumber.textContent = state.tempNumber
+}
+
+const convertFahrenheit = () => {
+    state.tempNumber = Math.floor((state.tempNumber * 9/5) + 32);
+    tempNumber = document.getElementById("temp-number")
+    tempNumber.textContent = state.tempNumber
+}
 
 const registerEvents = () => {
     initialTemp()
@@ -143,14 +178,29 @@ const registerEvents = () => {
     searchCity.addEventListener("click", findTemp)
     const resetButton = document.getElementById("reset-button")
     resetButton.addEventListener("click", resetCityToAtlanta)
-    const tempType = document.querySelector('.temp-type')
-    tempType.addEventListener('click', () => {
-        tempType.classList.toggle('active')
+    const celsius = document.getElementById('celsius')
+    const fahrenheit = document.getElementById('fahrenheit')
+    celsius.addEventListener('click', () => {
+        
+        if (celsius.classList.contains('active')) {
+            return
+        }
+        fahrenheit.classList.remove('active')
+        celsius.classList.add('active')
+        convertCelsius()
+
+
     });
-    // const showFahrenheit = document.getElementById("fahrenheit")
-    // showFahrenheit.addEventListener("click", convertFahrenheit)
-    // const showCelsius = document.getElementById("celsius")
-    // showCelsius.addEventListener("click", convertCelsius)
+
+    fahrenheit.addEventListener('click', () => {
+
+        if (fahrenheit.classList.contains('active')) {
+            return
+        }
+        celsius.classList.remove('active')
+        fahrenheit.classList.add('active')
+        convertFahrenheit()
+    });
 }
 
 
