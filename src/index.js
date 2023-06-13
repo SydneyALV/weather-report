@@ -84,7 +84,7 @@ const changeColorTemp = () => {
     }
 };
 
-const resetButton = () => {
+const resetCityToAtlanta = () => {
     const reset_city = document.getElementById("city-title")
     reset_city.textContent = "Atlanta"
 };
@@ -141,6 +141,8 @@ const registerEvents = () => {
     skySelect.addEventListener("change", changeSky)
     const searchCity = document.getElementById("real-temp-button")
     searchCity.addEventListener("click", findTemp)
+    const resetButton = document.getElementById("reset-button")
+    resetButton.addEventListener("click", resetCityToAtlanta)
     const tempType = document.querySelector('.temp-type')
     tempType.addEventListener('click', () => {
         tempType.classList.toggle('active')
