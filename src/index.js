@@ -48,10 +48,8 @@ const findTemp = async () => {
     }
 }
 
-
-
 const state = {
-    tempNumber: null, //temporary num, make default current temp
+    tempNumber: null,
     cityName: "Atlanta",
 }
 
@@ -77,16 +75,12 @@ const increaseTemp = () => {
     changeLandscape()
 }
 
-
-
 const changeColorTemp = () => {
-
     const temp = document.querySelector("#temp-number")
-    // const currentColor = temp.classList
     celsius = document.querySelector('#celsius')
     fahrenheit = document.querySelector('#fahrenheit')
-    let tempF = 0;
     
+    let tempF = 0;    
     if (celsius.classList.contains('active')) {
         tempF = Math.floor((state.tempNumber * 9/5) + 32);
     } 
@@ -120,7 +114,7 @@ const changeLandscape = () => {
     } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
         landscape.textContent = "🌸🌿🌼 🌷🌻🌿 ☘️🌱 🌻🌷"
     } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
-        landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾_🍃"
+        landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾 🍃"
     } else if (state.tempNumber <= 59) {
         landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲"
     }
@@ -180,20 +174,16 @@ const registerEvents = () => {
     resetButton.addEventListener("click", resetCityToAtlanta)
     const celsius = document.getElementById('celsius')
     const fahrenheit = document.getElementById('fahrenheit')
-    celsius.addEventListener('click', () => {
-        
+    celsius.addEventListener('click', () => {    
         if (celsius.classList.contains('active')) {
             return
         }
         fahrenheit.classList.remove('active')
         celsius.classList.add('active')
         convertCelsius()
-
-
     });
 
     fahrenheit.addEventListener('click', () => {
-
         if (fahrenheit.classList.contains('active')) {
             return
         }
@@ -202,10 +192,5 @@ const registerEvents = () => {
         convertFahrenheit()
     });
 }
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", registerEvents)

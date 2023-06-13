@@ -81,18 +81,27 @@ body {
     justify-content: space-evenly;
 }
 
+.tiles h3 {
+    color: rgb(62, 118, 190);
+}
+
+.tiles:hover {
+    border-style: outset;
+    box-shadow: #3b5a89;
+}
+
 .weather-garden {
     font-size: 3rem;
     justify-content: center;
     word-spacing: 20px;
-    /* padding: 3vh; */
 }
+
 #real-temp-button {
-    /* margin-top: 5vh; */
     width: 20vh;
     margin-left: auto;
     margin-right: auto;
 }
+
 #temp-number {
     font-size: 4rem;
     font-style: oblique;
@@ -131,7 +140,6 @@ body {
     font-size: 8vh;
     letter-spacing: 0.2vh;
     margin: 0;
-    /* padding: 0; */
 }
 
 #weather-saying {
@@ -148,12 +156,10 @@ body {
     margin-right: auto;
 }
 
-#celsius:active, .active {
-    /* top: 2px;
-    left: 1px; */
+.active {
     box-shadow: none;
     border: 2px black solid;
-    color: rgb(216, 216, 81);
+    color: black;
 }
 
 #tempButtonsContainer, #skySelectorContainer {
@@ -161,8 +167,6 @@ body {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    /* gap: 1.5rem; */
-    /* background-color: lightcyan; */
 }
 
 .temp-type {
@@ -188,6 +192,12 @@ h1, h2 {
     opacity: 10;
     border-radius: 10px;
 }
+
+#sky-selector, #city-input {
+    background-color: rgba(250, 250, 250, .2);
+    color: rgb(62, 118, 190)
+}
+
 section {
     text-align: center;
 }
@@ -247,7 +257,6 @@ button {
 }
 
 footer {
-    /* position: relative;  */
     text-align: center;
     bottom: 5px;
     justify-content: center;
