@@ -60,7 +60,7 @@ body {
 #tilecontainer {
     display: flex;
     /* border: 2px red solid; */
-    flex-direction: row;
+    flex-flow: row wrap;
     /* height: 50vh; */
     justify-content: space-evenly;
 }
@@ -82,7 +82,7 @@ body {
 }
 
 .weather-garden {
-    font-size: xx-large;
+    font-size: 3rem;
     justify-content: center;
     word-spacing: 20px;
     padding: 3vh;
@@ -94,7 +94,7 @@ body {
     margin-right: auto;
 }
 #temp-number {
-    font-size: 3rem;
+    font-size: 4rem;
     font-style: oblique;
     font-weight: bolder;
     padding: 2vh;
@@ -110,7 +110,6 @@ body {
 #landscape-container {
     padding: 4vh;
 }
-
 
 #tempbox, #skybox {
     display: flex;
@@ -131,6 +130,7 @@ body {
     font-size: 8vh;
     letter-spacing: 0.2vh;
 }
+
 #weather-saying {
     font-size: 4vh;
     font-style: italic;
@@ -139,8 +139,16 @@ body {
 #decrease-button {
     margin-left: auto;
 }
+
 #increase-button {
     margin-right: auto;
+}
+
+#celsius:active, .active {
+    /* top: 2px;
+    left: 1px; */
+    box-shadow: none;
+    color: rgb(216, 216, 81);
 }
 
 #tempButtonsContainer, #skySelectorContainer {

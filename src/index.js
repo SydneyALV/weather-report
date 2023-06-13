@@ -1,9 +1,4 @@
 // // Location API
-// const axios = require('axios');
-// import axios from "axios";
-// const OPENWEATHER_KEY = process.env['openWeather_key']
-// const LOCATIONIQ_KEY = process.env['locationIQ_key'];
-
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
     try {
@@ -20,12 +15,9 @@ const findLatitudeAndLongitude = async (city) => {
     } catch (err) {
         console.log(err)
     }
-    
 }
 
 // OpenWeather API
-
-
 const findTemp = async () => {
     const cityname = state.cityName
     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
@@ -37,18 +29,15 @@ const findTemp = async () => {
                 "lon": longitude,
             }
         })
-        current_temp_kelvin= response.data.main.temp;
-        current_temp_fahrenheit = Math.floor((current_temp_kelvin-273.15) * 9/5 +32)
+        current_temp = response.data.main.temp; // in kelvin
         tempNumber = document.getElementById("temp-number");
-        tempNumber.textContent = current_temp_fahrenheit;
-        state.tempNumber = current_temp_fahrenheit;
+        tempNumber.textContent = convertFahrenheit(current_temp);
+        state.tempNumber = convertFahrenheit(current_temp);
         changeColorTemp()
         changeLandscape()
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error, "Temperature could not be found.")
     }
-
 }
 
 const state = {
@@ -152,6 +141,19 @@ const registerEvents = () => {
     skySelect.addEventListener("change", changeSky)
     const searchCity = document.getElementById("real-temp-button")
     searchCity.addEventListener("click", findTemp)
+    const tempType = document.querySelector('.temp-type')
+    tempType.addEventListener('click', () => {
+        tempType.classList.toggle('active')
+    });
+    // const showFahrenheit = document.getElementById("fahrenheit")
+    // showFahrenheit.addEventListener("click", convertFahrenheit)
+    // const showCelsius = document.getElementById("celsius")
+    // showCelsius.addEventListener("click", convertCelsius)
 }
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", registerEvents)
