@@ -1,7 +1,13 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 
-// // Location API
+//========= State =========\\
+const state = {
+    tempNumber: null,
+    cityName: "Atlanta",
+}
+
+//========= LocationIQ API =========\\
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
     try {
@@ -12,15 +18,15 @@ const findLatitudeAndLongitude = async (city) => {
             }
         });
 
-    latitude = response.data[0].lat;
-    longitude = response.data[0].lon;
-    return { latitude, longitude };
+        latitude = response.data[0].lat;
+        longitude = response.data[0].lon;
+        return { latitude, longitude };
     } catch (err) {
         console.log(err)
     }
 }
 
-// OpenWeather API
+//========= OpenWeather API =========\\
 const findTemp = async () => {
     const cityname = state.cityName
     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
@@ -43,11 +49,22 @@ const findTemp = async () => {
     }
 }
 
-const state = {
-    tempNumber: null, //temporary num, make default current temp
-    cityName: "Atlanta",
-}
+//========= Select City Tile =========\\
+const changeCityName = () => {
+    let cityNameBox = document.getElementById("city-title")
+    let cityInput = document.getElementById("city-input")
+    let cityInputContent = cityInput.value
+    state.cityName = cityInputContent
+    cityNameBox.textContent = cityInputContent
+};
 
+const resetCityToAtlanta = () => {
+    const reset_city = document.getElementById("city-title")
+    reset_city.textContent = "Atlanta"
+};
+
+
+//========= Temperature Tile =========\\
 const initialTemp = () => {
     const temp = document.getElementById("temp-number")
     temp.textContent = state.tempNumber;
@@ -69,53 +86,42 @@ const increaseTemp = () => {
     changeLandscape()
 }
 
+let celsius = document.querySelector('#celsius')
+let fahrenheit = document.querySelector('#fahrenheit')
+let tempF = 0;    
+
 const changeColorTemp = () => {
     const temp = document.querySelector("#temp-number")
-    celsius = document.querySelector('#celsius')
-    fahrenheit = document.querySelector('#fahrenheit')
     
-    let tempF = 0;    
     if (celsius.classList.contains('active')) {
         tempF = Math.floor((state.tempNumber * 9/5) + 32);
-    } 
-    
-    if (fahrenheit.classList.contains('active')) {
+    } else if (fahrenheit.classList.contains('active')) {
         tempF = state.tempNumber;
     }
 
     if (tempF >= 80) {
-    // const currentColor = temp.classList
-
-    if (state.tempNumber >= 80) {
         temp.classList = ["red"]
-    } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
+    } else if (tempF >= 70 && tempF <= 79) {
         temp.classList = ["orange"]
-    } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
+    } else if (tempF >= 60 && tempF <= 69) {
         temp.classList = ["yellow"]
-    } else if (state.tempNumber >= 50 && state.tempNumber <= 59) {
+    } else if (tempF >= 50 && tempF <= 59) {
         temp.classList = ["green"]
-    } else if (state.tempNumber <= 49) {
+    } else if (tempF <= 49) {
         temp.classList = ["teal"]
     }
 };
 
-const resetCityToAtlanta = () => {
-    const reset_city = document.getElementById("city-title")
-    reset_city.textContent = "Atlanta"
-};
 
+//========= Weather Garden =========\\
 const changeLandscape = () => {
-    celsius = document.querySelector('#celsius')
-    fahrenheit = document.querySelector('#fahrenheit')
-    
-    let tempF = 0; 
+
     if (celsius.classList.contains('active')) {
         tempF = Math.floor((state.tempNumber * 9/5) + 32);
-    } 
-    
-    if (fahrenheit.classList.contains('active')) {
+    } else if (fahrenheit.classList.contains('active')) {
         tempF = state.tempNumber;
     }
+    
     const landscape = document.getElementById("landscape")
     if (tempF >= 80) {
         landscape.textContent = "🌵  🐍 🦂 🌵🌵  🐍 🏜 🦂"
@@ -146,29 +152,24 @@ const changeSky = ({ target: { value } }) => {
     }
 };
 
-const changeCityName = () => {
-    let cityNameBox = document.getElementById("city-title")
-    let cityInput = document.getElementById("city-input")
-    let cityInputContent = cityInput.value
-    state.cityName = cityInputContent
-    cityNameBox.textContent = cityInputContent
-};
-
-
+//========= Registered Events =========\\
 const registerEvents = () => {
+
     initialTemp()
+
+    //========= Select City Tile =========\\
+    const cityTitle = document.querySelector("#city-input")
+    cityTitle.addEventListener("input", changeCityName)
+    const resetButton = document.getElementById("reset-button")
+    resetButton.addEventListener("click", resetCityToAtlanta)
+
+    //========= Temperature Tile =========\\
     const decreaseButton = document.getElementById("decrease-button");
     decreaseButton.addEventListener("click", decreaseTemp)
     const increaseButton = document.getElementById("increase-button");
     increaseButton.addEventListener("click", increaseTemp)
-    const cityTitle = document.querySelector("#city-input")
-    cityTitle.addEventListener("input", changeCityName)
-    const skySelect = document.getElementById("sky-selector")
-    skySelect.addEventListener("change", changeSky)
     const searchCity = document.getElementById("real-temp-button")
     searchCity.addEventListener("click", findTemp)
-    const resetButton = document.getElementById("reset-button")
-    resetButton.addEventListener("click", resetCityToAtlanta)
     const celsius = document.getElementById('celsius')
     const fahrenheit = document.getElementById('fahrenheit')
     celsius.addEventListener('click', () => {    
@@ -188,6 +189,10 @@ const registerEvents = () => {
         fahrenheit.classList.add('active')
         convertFahrenheit()
     });
+    
+    //========= Select Sky Tile =========\\
+    const skySelect = document.getElementById("sky-selector")
+    skySelect.addEventListener("change", changeSky)
 }
 
 document.addEventListener("DOMContentLoaded", registerEvents)
