@@ -59,9 +59,7 @@ body {
 
 #tilecontainer {
     display: flex;
-    /* border: 2px red solid; */
     flex-flow: row wrap;
-    /* height: 50vh; */
     justify-content: space-evenly;
 }
 

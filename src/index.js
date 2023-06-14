@@ -26,7 +26,7 @@ const findTemp = async () => {
     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
     
     try {
-        const response = await axios.get(`https://weather-report-proxy-server-jk7z.onrender.com/weather`,{
+        const response = await axios.get('https://weather-report-proxy-server-jk7z.onrender.com/weather',{
             params: {
                 "lat": latitude,
                 "lon": longitude,
