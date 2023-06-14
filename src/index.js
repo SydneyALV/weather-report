@@ -1,4 +1,5 @@
-console.log('New index.js');
+import axios from 'axios'
+
 //========= LocationIQ API =========\\
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
