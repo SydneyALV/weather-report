@@ -1,3 +1,4 @@
+console.log('New Index');
 //========= LocationIQ API =========\\
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
