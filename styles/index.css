@@ -92,6 +92,7 @@ body {
     font-size: 3rem;
     justify-content: center;
     word-spacing: 20px;
+    /* padding: 3vh; */
 }
 
 #real-temp-button {
@@ -112,11 +113,10 @@ body {
     font-size: 6vh;
     letter-spacing: 0.2vh;
     text-transform: capitalize;
-    height: 5vh;
 }
 
 #landscape-container {
-    padding: 2vh;
+    padding: 4vh;
 }
 
 #tempbox, #skybox {
@@ -138,12 +138,12 @@ body {
     font-size: 8vh;
     letter-spacing: 0.2vh;
     margin: 0;
+    /* padding: 0; */
 }
 
 #weather-saying {
     font-size: 4vh;
     font-style: italic;
-    margin: 0;
 }
 
 #decrease-button {
@@ -157,7 +157,7 @@ body {
 .active {
     box-shadow: none;
     border: 2px black solid;
-    color: black;
+    color: rgb(216, 216, 81);
 }
 
 #tempButtonsContainer, #skySelectorContainer {
@@ -197,7 +197,9 @@ h1, h2 {
 }
 
 section {
+    /* border: 2px red solid; */
     text-align: center;
+    /* padding: 10px; */
 }
 
 .red {
@@ -255,6 +257,7 @@ button {
 }
 
 footer {
+    /* position: relative;  */
     text-align: center;
     bottom: 5px;
     justify-content: center;

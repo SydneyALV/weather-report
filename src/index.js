@@ -34,16 +34,8 @@ const findTemp = async () => {
         })
         current_temp = response.data.main.temp; // in kelvin
         tempNumber = document.getElementById("temp-number");
-
-        const celsius = document.querySelector('#celsius')
-        const fahrenheit = document.querySelector('#fahrenheit')
-        if (celsius.classList.contains('active')) {
-            celsius.classList.remove('active')
-            fahrenheit.classList.add('active')
-        }
-
-        state.tempNumber = Math.floor((current_temp - 273.15) * 9/5 + 32);
-        tempNumber.textContent = state.tempNumber;
+        tempNumber.textContent = convertFahrenheit(current_temp);
+        state.tempNumber = convertFahrenheit(current_temp);
         changeColorTemp()
         changeLandscape()
     } catch (error) {
@@ -52,14 +44,13 @@ const findTemp = async () => {
 }
 
 const state = {
-    tempNumber: null,
+    tempNumber: null, //temporary num, make default current temp
     cityName: "Atlanta",
 }
 
-const initialTemp = async () => {
+const initialTemp = () => {
     const temp = document.getElementById("temp-number")
     temp.textContent = state.tempNumber;
-    await findTemp()
     changeColorTemp()
     changeLandscape()
 }
@@ -93,14 +84,17 @@ const changeColorTemp = () => {
     }
 
     if (tempF >= 80) {
+    // const currentColor = temp.classList
+
+    if (state.tempNumber >= 80) {
         temp.classList = ["red"]
-    } else if (tempF >= 70 && tempF <= 79) {
+    } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
         temp.classList = ["orange"]
-    } else if (tempF >= 60 && tempF <= 69) {
+    } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
         temp.classList = ["yellow"]
-    } else if (tempF >= 50 && tempF <= 59) {
+    } else if (state.tempNumber >= 50 && state.tempNumber <= 59) {
         temp.classList = ["green"]
-    } else if (tempF <= 49) {
+    } else if (state.tempNumber <= 49) {
         temp.classList = ["teal"]
     }
 };
@@ -160,17 +154,6 @@ const changeCityName = () => {
     cityNameBox.textContent = cityInputContent
 };
 
-const convertCelsius = () => {
-    state.tempNumber = Math.floor(5 / 9 * (state.tempNumber - 32));
-    tempNumber = document.getElementById("temp-number")
-    tempNumber.textContent = state.tempNumber
-}
-
-const convertFahrenheit = () => {
-    state.tempNumber = Math.floor((state.tempNumber * 9/5) + 32);
-    tempNumber = document.getElementById("temp-number")
-    tempNumber.textContent = state.tempNumber
-}
 
 const registerEvents = () => {
     initialTemp()
