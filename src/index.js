@@ -108,14 +108,26 @@ const resetCityToAtlanta = () => {
 };
 
 const changeLandscape = () => {
+    // const temp = document.querySelector("#temp-number")
+    celsius = document.querySelector('#celsius')
+    fahrenheit = document.querySelector('#fahrenheit')
+    
+    let tempF = 0; 
+    if (celsius.classList.contains('active')) {
+        tempF = Math.floor((state.tempNumber * 9/5) + 32);
+    } 
+    
+    if (fahrenheit.classList.contains('active')) {
+        tempF = state.tempNumber;
+    }
     const landscape = document.getElementById("landscape")
-    if (state.tempNumber >= 80) {
+    if (tempF >= 80) {
         landscape.textContent = "🌵  🐍 🦂 🌵🌵  🐍 🏜 🦂"
-    } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
+    } else if (tempF >= 70 && tempF <= 79) {
         landscape.textContent = "🌸🌿🌼 🌷🌻🌿 ☘️🌱 🌻🌷"
-    } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
+    } else if (tempF >= 60 && tempF <= 69) {
         landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾 🍃"
-    } else if (state.tempNumber <= 59) {
+    } else if (tempF <= 59) {
         landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲"
     }
 };
