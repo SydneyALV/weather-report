@@ -1,6 +1,3 @@
-import 'regenerator-runtime/runtime';
-import axios from 'axios';
-
 //========= LocationIQ API =========\\
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
