@@ -6,6 +6,7 @@ const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
     try {
         const response = await axios.get('https://weather-report-proxy-server-jk7z.onrender.com/location',
+        const response = await axios.get('https://weather-report-proxy-server-jk7z.onrender.com/location',
         {
             params: {
                 q: city,
@@ -26,7 +27,7 @@ const findTemp = async () => {
     const {latitude, longitude} = await findLatitudeAndLongitude(cityname)
     
     try {
-        const response = await axios.get(`https://weather-report-proxy-server-jk7z.onrender.com/weather`,{
+        const response = await axios.get(`http://127.0.0.1:5000/weather`,{
             params: {
                 "lat": latitude,
                 "lon": longitude,
@@ -51,10 +52,8 @@ const findTemp = async () => {
     }
 }
 
-
-
 const state = {
-    tempNumber: null, //temporary num, make default current temp
+    tempNumber: null,
     cityName: "Atlanta",
 }
 
@@ -80,16 +79,12 @@ const increaseTemp = () => {
     changeLandscape()
 }
 
-
-
 const changeColorTemp = () => {
-
     const temp = document.querySelector("#temp-number")
-    // const currentColor = temp.classList
     celsius = document.querySelector('#celsius')
     fahrenheit = document.querySelector('#fahrenheit')
-    let tempF = 0;
     
+    let tempF = 0;    
     if (celsius.classList.contains('active')) {
         tempF = Math.floor((state.tempNumber * 9/5) + 32);
     } 
@@ -117,14 +112,26 @@ const resetCityToAtlanta = () => {
 };
 
 const changeLandscape = () => {
+    // const temp = document.querySelector("#temp-number")
+    celsius = document.querySelector('#celsius')
+    fahrenheit = document.querySelector('#fahrenheit')
+    
+    let tempF = 0; 
+    if (celsius.classList.contains('active')) {
+        tempF = Math.floor((state.tempNumber * 9/5) + 32);
+    } 
+    
+    if (fahrenheit.classList.contains('active')) {
+        tempF = state.tempNumber;
+    }
     const landscape = document.getElementById("landscape")
-    if (state.tempNumber >= 80) {
+    if (tempF >= 80) {
         landscape.textContent = "🌵  🐍 🦂 🌵🌵  🐍 🏜 🦂"
-    } else if (state.tempNumber >= 70 && state.tempNumber <= 79) {
+    } else if (tempF >= 70 && tempF <= 79) {
         landscape.textContent = "🌸🌿🌼 🌷🌻🌿 ☘️🌱 🌻🌷"
-    } else if (state.tempNumber >= 60 && state.tempNumber <= 69) {
-        landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾_🍃"
-    } else if (state.tempNumber <= 59) {
+    } else if (tempF >= 60 && tempF <= 69) {
+        landscape.textContent = "🌾🌾 🍃 🪨  🛤 🌾🌾🌾 🍃"
+    } else if (tempF <= 59) {
         landscape.textContent = "🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲"
     }
 };
@@ -183,20 +190,16 @@ const registerEvents = () => {
     resetButton.addEventListener("click", resetCityToAtlanta)
     const celsius = document.getElementById('celsius')
     const fahrenheit = document.getElementById('fahrenheit')
-    celsius.addEventListener('click', () => {
-        
+    celsius.addEventListener('click', () => {    
         if (celsius.classList.contains('active')) {
             return
         }
         fahrenheit.classList.remove('active')
         celsius.classList.add('active')
         convertCelsius()
-
-
     });
 
     fahrenheit.addEventListener('click', () => {
-
         if (fahrenheit.classList.contains('active')) {
             return
         }
@@ -205,10 +208,5 @@ const registerEvents = () => {
         convertFahrenheit()
     });
 }
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", registerEvents)
