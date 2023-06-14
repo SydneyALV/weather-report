@@ -1,12 +1,6 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 
-//========= State =========\\
-const state = {
-    tempNumber: null,
-    cityName: "Atlanta",
-}
-
 //========= LocationIQ API =========\\
 const findLatitudeAndLongitude = async (city) => {
     let latitude, longitude;
@@ -47,6 +41,16 @@ const findTemp = async () => {
     } catch (error) {
         console.log(error, "Temperature could not be found.")
     }
+}
+
+const convertFahrenheit = (temp) => {
+    return Math.floor((temp - 273.15) * 9/5 + 32);
+}
+
+//========= State =========\\
+const state = {
+    tempNumber: null,
+    cityName: "Atlanta",
 }
 
 //========= Select City Tile =========\\
@@ -154,15 +158,12 @@ const changeSky = ({ target: { value } }) => {
 
 //========= Registered Events =========\\
 const registerEvents = () => {
-
     initialTemp()
-
     //========= Select City Tile =========\\
     const cityTitle = document.querySelector("#city-input")
     cityTitle.addEventListener("input", changeCityName)
     const resetButton = document.getElementById("reset-button")
     resetButton.addEventListener("click", resetCityToAtlanta)
-
     //========= Temperature Tile =========\\
     const decreaseButton = document.getElementById("decrease-button");
     decreaseButton.addEventListener("click", decreaseTemp)
@@ -180,7 +181,6 @@ const registerEvents = () => {
         celsius.classList.add('active')
         convertCelsius()
     });
-
     fahrenheit.addEventListener('click', () => {
         if (fahrenheit.classList.contains('active')) {
             return
@@ -188,8 +188,7 @@ const registerEvents = () => {
         celsius.classList.remove('active')
         fahrenheit.classList.add('active')
         convertFahrenheit()
-    });
-    
+    });    
     //========= Select Sky Tile =========\\
     const skySelect = document.getElementById("sky-selector")
     skySelect.addEventListener("change", changeSky)
