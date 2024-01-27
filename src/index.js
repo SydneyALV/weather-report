@@ -13,7 +13,8 @@ const findLatitudeAndLongitude = async (city) => {
     longitude = response.data[0].lon;
     return { latitude, longitude };
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        console.log("City does not exist.")
     }
 }
 
