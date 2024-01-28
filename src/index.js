@@ -1,5 +1,5 @@
 import '../node_modules/regenerator-runtime/runtime.js';
-import axios from 'axios';
+import axios from '../node_modules/axios';
 
 
 // // Location API
