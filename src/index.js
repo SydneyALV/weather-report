@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime';
+import '../node_modules/regenerator-runtime/runtime.js';
 import axios from 'axios';
 
 
