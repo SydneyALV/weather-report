@@ -1,6 +1,7 @@
-import '../node_modules/regenerator-runtime/runtime.js';
-import axios from '../node_modules/axios';
-
+// import '../node_modules/regenerator-runtime/runtime.js';
+// import axios from '../node_modules/axios';
+import 'regenerator-runtime/runtime';
+import axios from 'axios';
 
 // // Location API
 const findLatitudeAndLongitude = async (city) => {
